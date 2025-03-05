@@ -1,0 +1,25 @@
+{
+    "foglalasok": [
+        {
+            "id" : "1",
+            "day": "Hetfo",
+            "hour": "14",
+            "name": "Kiss Pista",
+            "number": "+36306795868"
+        },
+        {
+            "id" : "2",
+            "day": "Szerda",
+            "hour": "10",
+            "name": "Nagy Pista",
+            "number": "+36302495574"
+        },
+        {
+            "id" : "3",
+            "day": "Csutortok",
+            "hour": "17",
+            "name": "Közepes Pista",
+            "number": "+36202835868"
+        }
+    ]
+}
