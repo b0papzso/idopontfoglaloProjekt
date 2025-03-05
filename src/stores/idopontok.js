@@ -9,5 +9,5 @@ export const useFoglalasStore = defineStore('foglalasok', () => {
     .then(data => foglalasok.value = data)
   }
 
-  return{foglalasok}
+  return{foglalasok, loadAll}
 })

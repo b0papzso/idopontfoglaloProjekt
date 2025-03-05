@@ -9,29 +9,51 @@
     <option value="Csutortok">Csütörtök</option>
     <option value="Pentek">Péntek</option>
   </select>
-  <div class="table mt-3" >
-    <label for="allHours"><h3>Lehetséges időpontok</h3></label>
-    <select name="allHours" class="form-select" >
-      <option v-for="hour in options" :value="hour">{{ hour }}</option>
+  <div class="table mt-3" v-if="showHours">
+    <label for="allHours"><h3>Szabad időpontok</h3></label>
+    <select name="allHours" class="form-select" v-model="hourValue">
+      <option v-for="hour in options" :value="hour" >{{ hour }}</option>
     </select>
   </div>
-  <button class="btn btn-primary btn-outline-warning">Foglalás</button>
+  <button class="btn btn-primary btn-outline-warning" :disabled="!showHours">Foglalás</button>
   </div>
 </template>
 
 <script setup>
+import { onMounted, ref, watch } from 'vue';
 import { useFoglalasStore } from '@/stores/idopontok';
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-const router = useRouter()
-const foglalasokStore = useFoglalasStore()
-const options = ref([8, 9, 10, 11, 12, 13, 14, 15, 16])
-var day = ref()
-var showHours = false;
-if(day.value != null)
-{
-  showHours = true
+
+const router = useRouter();
+const foglalasokStore = useFoglalasStore();
+const options = ref([8, 9, 10, 11, 12, 13, 14, 15, 16]);
+const day = ref(null);
+const hourValue = ref(null);
+const showHours = ref(false); 
+
+// Figyeli a day változást, és ha van értéke, beállítja showHours-t
+watch(day, (newVal) => {
+  console.log("Selected day:", newVal);
+  showHours.value = newVal !== null;
+  options.value = ([8, 9, 10, 11, 12, 13, 14, 15, 16]);
+  showAllHours()
+  
+});
+
+const showAllHours = () =>{
+  
+  foglalasokStore.foglalasok.forEach(foglalas =>{
+    if(foglalas.day == day.value)
+    {
+      options.value.find(p => p == foglalas.hour)
+    }
+  })
+  
 }
-console.log(day.value)
+
+onMounted(() => {
+  foglalasokStore.loadAll()
+})
 </script>
+
 
