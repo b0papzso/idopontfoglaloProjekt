@@ -8,4 +8,6 @@ export const useFoglalasStore = defineStore('foglalasok', () => {
     .then(resp => resp.json())
     .then(data => foglalasok.value = data)
   }
+
+  return{foglalasok}
 })
