@@ -39,19 +39,14 @@ watch(day, (newVal) => {
   
 });
 
-const showAllHours = () =>{
-  
-  foglalasokStore.foglalasok.forEach(foglalas =>{
-    for (let i = 0; i < options.value.length; i++) {
-      if(options.value.find(p => p == foglalas.hour) && foglalas.day == day.value) 
-      {
-        options.value.splice(i, 1)
-      }
-    }
-  }
-  )
-}
+const showAllHours = () => {
+  const selectedDay = day.value;
+  const bookedHours = foglalasokStore.foglalasok
+    .filter(foglalas => foglalas.day === selectedDay)
+    .map(foglalas => parseInt(foglalas.hour));
 
+  options.value = options.value.filter(hour => !bookedHours.includes(hour));
+};
 onMounted(() => {
   foglalasokStore.loadAll()
 })
