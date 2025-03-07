@@ -51,12 +51,15 @@ onMounted(() => {
 });
 
 const goToFoglalas = () => {
-  router.push({
-    path: '/foglalas',
-    query: {
-      day: day.value,
-      hour: hourValue.value
-    }
-  });
+  if(router)
+  {
+    router.push({
+      path: '/foglalas',
+      query: {
+        day: day.value,
+        hour: hourValue.value
+      }
+    });
+  }
 };
 </script>
