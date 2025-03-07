@@ -31,7 +31,6 @@ const day = ref(null);
 const hourValue = ref(null);
 const showHours = ref(false); 
 
-// Figyeli a day változást, és ha van értéke, beállítja showHours-t
 watch(day, (newVal) => {
   console.log("Selected day:", newVal);
   showHours.value = newVal !== null;
@@ -43,12 +42,14 @@ watch(day, (newVal) => {
 const showAllHours = () =>{
   
   foglalasokStore.foglalasok.forEach(foglalas =>{
-    if(foglalas.day == day.value)
-    {
-      options.value.find(p => p == foglalas.hour)
+    for (let i = 0; i < options.value.length; i++) {
+      if(options.value.find(p => p == foglalas.hour) && foglalas.day == day.value) 
+      {
+        options.value.splice(i, 1)
+      }
     }
-  })
-  
+  }
+  )
 }
 
 onMounted(() => {
