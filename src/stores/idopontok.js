@@ -8,6 +8,15 @@ export const useFoglalasStore = defineStore('foglalasok', () => {
     .then(resp => resp.json())
     .then(data => foglalasok.value = data)
   }
-
-  return{foglalasok, loadAll}
+  const ujFoglalas = (day, hour, name, number) => {
+    fetch("http://localhost:3000/foglalasok", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({day, hour, name, number})
+    })
+    .then(() => loadAll())
+  }
+  return{foglalasok, loadAll, ujFoglalas}
 })
