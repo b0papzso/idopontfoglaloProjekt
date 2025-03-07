@@ -11,11 +11,11 @@
     </select>
     <div class="table mt-3" v-if="showHours">
       <label for="allHours"><h3>Szabad időpontok</h3></label>
-      <select name="allHours" class="form-select" v-model="hourValue">
+      <select name="allHours" class="form-select" v-model="hourValue" id="hour">
         <option v-for="hour in options" :value="hour">{{ hour }}</option>
       </select>
     </div>
-    <button class="btn btn-primary btn-outline-warning" :disabled="!hourValue" @click="goToFoglalas">Foglalás</button>
+    <button id="button" class="btn btn-primary btn-outline-warning" :disabled="!hourValue" @click="goToFoglalas">Foglalás</button>
   </div>
 </template>
 
